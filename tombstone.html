@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>傳統墓碑文化圖錄 — 林園鄭家大墓研究</title>
+  <style>
+    :root {
+      --bg: #111316;
+      --surface: #191c21;
+      --card: #20242b;
+      --accent: #b4c4d4;
+      --accent2: #7a90a4;
+      --text: #d4dce6;
+      --muted: #7a8898;
+      --quote-bg: #1c2028;
+      --border: #333c47;
+      --tag-bg: #22282f;
+      --stone: #96b0c4;
+      --stone-dark: #506070;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif TC', 'Georgia', serif;
+      line-height: 1.85;
+      font-size: 16px;
+    }
+    header {
+      background: linear-gradient(180deg, #060810 0%, #0e1218 60%, var(--surface) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    .header-badge {
+      display: inline-block;
+      background: #141a22;
+      border: 1px solid var(--stone-dark);
+      color: var(--stone);
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    h1 { font-size: clamp(22px, 4vw, 34px); color: var(--stone); letter-spacing: 1px; line-height: 1.4; margin-bottom: 12px; }
+    .subtitle { color: var(--muted); font-size: 14px; letter-spacing: 1px; }
+    .back-link { display: inline-block; margin-top: 16px; color: var(--accent2); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav a {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 12px 16px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover { color: var(--stone); border-bottom-color: var(--stone); }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    section { margin-bottom: 60px; }
+    h2 {
+      font-size: 20px;
+      color: var(--stone);
+      border-left: 4px solid var(--stone-dark);
+      padding-left: 14px;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    h3 { font-size: 16px; color: #a4c0d4; margin: 28px 0 12px; padding-left: 6px; border-left: 2px solid var(--stone-dark); }
+    p { margin-bottom: 16px; }
+    blockquote {
+      background: #141a22;
+      border-left: 4px solid var(--stone-dark);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 15px;
+    }
+    blockquote strong { color: var(--stone); }
+    ul, ol { padding-left: 22px; margin: 12px 0 16px; }
+    li { margin-bottom: 8px; }
+    li strong { color: var(--stone); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* Timeline */
+    .timeline { margin: 16px 0; }
+    .tl-item { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+    .tl-era {
+      min-width: 100px;
+      background: #141a22;
+      border: 1px solid var(--stone-dark);
+      color: var(--stone);
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .tl-text { flex: 1; font-size: 15px; }
+
+    /* Stone item cards */
+    .stone-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin: 24px 0; }
+    .stone-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .stone-card:hover { border-color: var(--stone-dark); }
+    .stone-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #090c10;
+      display: block;
+    }
+    .stone-img-fallback {
+      width: 100%;
+      height: 220px;
+      background: #090c10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+    }
+    .stone-card-body { padding: 16px; }
+    .stone-name { color: var(--stone); font-size: 16px; font-weight: bold; margin-bottom: 4px; }
+    .stone-en { color: var(--muted); font-size: 12px; margin-bottom: 10px; letter-spacing: 1px; }
+    .stone-desc { font-size: 14px; color: var(--text); line-height: 1.7; }
+    .stone-caption { font-size: 11px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-style: italic; }
+
+    /* Full-width image block */
+    .img-full {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .img-full img { width: 100%; max-height: 500px; object-fit: contain; background: #090c10; display: block; }
+    .img-full-title { padding: 14px 18px 6px; font-size: 15px; color: var(--stone); font-weight: bold; }
+    .img-full-caption { padding: 8px 18px 16px; font-size: 13px; color: var(--muted); font-style: italic; }
+    .stone-img-fallback-full {
+      width: 100%;
+      height: 280px;
+      background: #090c10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: #141a22; color: var(--stone); padding: 10px 16px; text-align: left; border: 1px solid var(--border); letter-spacing: 0.5px; }
+    td { padding: 10px 16px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
+    tr:nth-child(even) td { background: #161c22; }
+    td strong { color: var(--stone); }
+
+    /* Info box */
+    .info-box {
+      background: #141a22;
+      border: 1px solid var(--stone-dark);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .info-box h4 { color: var(--stone); font-size: 14px; margin-bottom: 10px; letter-spacing: 0.5px; }
+    .info-box p, .info-box li { font-size: 14px; }
+
+    /* Tombstone diagram */
+    .tomb-diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 20px 0;
+      font-family: monospace;
+    }
+    .tomb-diagram-title { color: var(--stone); font-family: 'Noto Serif TC', serif; font-size: 14px; margin-bottom: 16px; }
+    .tomb-ascii {
+      color: var(--accent);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .tomb-ascii .label { color: var(--stone); font-weight: bold; }
+    .tomb-ascii .muted { color: var(--muted); }
+
+    /* Annotation grid */
+    .annot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .annot-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .annot-num {
+      display: inline-block;
+      background: var(--stone-dark);
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 1px 8px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+    }
+    .annot-term { color: var(--stone); font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+    .annot-sub { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .annot-desc { font-size: 13px; color: var(--text); }
+
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .sources-title { color: var(--stone); font-size: 16px; font-weight: bold; margin-bottom: 20px; padding-left: 14px; border-left: 4px solid var(--stone-dark); }
+    .source-item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; font-size: 13px; }
+    .source-item a { color: var(--accent2); }
+    .source-num { color: var(--stone); font-weight: bold; margin-right: 8px; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      .stone-grid { grid-template-columns: 1fr; }
+      main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">傳統墓碑文化研究 · 石刻圖錄</div>
+  <h1>🪨 傳統墓碑文化圖錄</h1>
+  <p class="subtitle">中國碑刻傳統——從石碑到閩南式墓碑</p>
+  <a class="back-link" href="index.html">← 返回 林園鄭家大墓主頁</a>
+</header>
+
+<nav>
+  <a href="#intro">概論</a>
+  <a href="#history">歷史演變</a>
+  <a href="#types">碑的種類</a>
+  <a href="#bixi">贔屭龜趺</a>
+  <a href="#structure">碑文結構</a>
+  <a href="#material">材料工藝</a>
+  <a href="#taiwan">台灣清代墓碑</a>
+  <a href="#read">解讀指南</a>
+  <a href="#zheng">與鄭家大墓</a>
+  <a href="#sources">出處</a>
+</nav>
+
+<main>
+
+  <!-- 概論 -->
+  <section id="intro">
+    <h2>🏛️ 什麼是中國傳統墓碑？</h2>
+
+    <blockquote>
+      <strong>碑</strong>，原指日晷的日影測量桿，後演變為竪立於地面的石板，用於刻寫銘文、記錄人事。「墓碑」是立於墓前記錄亡者身份、生平與後代的石刻，是中國「慎終追遠」文化的核心物件之一。
+    </blockquote>
+
+    <p>中國墓碑文化有三大核心功能：</p>
+    <ul>
+      <li><strong>身份標示</strong>：記錄亡者姓名、籍貫、官職，確立社會地位</li>
+      <li><strong>血脈傳承</strong>：刻上子孫名諱，實體化宗族血緣的延續</li>
+      <li><strong>祭祀定位</strong>：作為祭拜的焦點，讓後代「有處可祭」</li>
+    </ul>
+
+    <div class="img-full">
+      <div class="img-full-title">明代神道碑亭——北京明十三陵（約 1900 年攝）</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Stele_Pavilion%2C_SacredWay%2C_Ming_Tombs%2C_Peking%2C_China_%28c1900%29_Attribution_Unk_%28RESTORED%29_%284075766990%29.jpg"
+           alt="明代神道碑亭"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="stone-img-fallback-full" style="display:none;">圖片無法載入</div>
+      <div class="img-full-caption">明十三陵神道入口的碑亭，內置大型神道碑（龍首龜趺），為皇帝陵墓最高規格碑制。約 1900 年攝影留存。<br>來源：Wikimedia Commons / 公有領域</div>
+    </div>
+
+    <p>與西方墓碑（平臥式墓石）最大的不同在於，中國墓碑強調<strong>垂直豎立</strong>，象徵亡者靈魂的「站立」存在；銘文由上而下、從右向左書寫，保留漢字書法傳統的最完整形式。</p>
+  </section>
+
+  <hr>
+
+  <!-- 歷史演變 -->
+  <section id="history">
+    <h2>📜 中國碑刻的歷史演變</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-era">商周<br>1600–256 BCE</div>
+        <div class="tl-text">「碑」字最初指木樁或石柱，用於測日影、拴牲口或下棺時懸繩。貴族墓前立「豐碑」（大石柱）以示身份，此為墓碑的原型，尚無刻文。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">秦漢<br>221 BCE–220 CE</div>
+        <div class="tl-text">碑開始刻寫文字，出現最早的有銘文碑。東漢時「刻石立碑」盛行，墓碑格式初步確立：碑首（碑頭）、碑身（刻銘文）、碑座三部分成形。曹操 220 年下令「不得立碑」（防奢靡），東漢碑風一時衰歇。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">魏晉南北朝<br>220–589 CE</div>
+        <div class="tl-text">佛教石刻大量出現，造像碑、墓誌銘興起。「墓誌」（埋於墓中的石版）與「墓碑」（立於地面）分化為兩種不同功能的記錄形式。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">唐宋<br>618–1279 CE</div>
+        <div class="tl-text">碑刻藝術達到高峰。唐代書法家歐陽詢、顏真卿、柳公權的墓誌碑銘成為後世習字典範。「贔屭龜趺碑」普及——以龍生九子之一「贔屭」為碑座，象徵長久承載之力。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">明清<br>1368–1912 CE</div>
+        <div class="tl-text">嚴格的碑制等級確立：皇帝用「龍首龜趺」，諸侯王用「麒麟首」，官員依品第使用「螭首」或「方首」，平民只許用素碑。閩南、台灣的漢人移民將此傳統帶入台灣，發展出在地化的閩南式墓碑風格。</div>
+      </div>
+    </div>
+
+    <div class="stone-grid">
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Buddhist_Stela_Northern_Wei_period.jpg"
+             alt="北魏佛教石碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">北魏石碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">北魏佛教造像碑</div>
+          <div class="stone-en">Buddhist Votive Stele, Northern Wei (386–534 CE)</div>
+          <div class="stone-desc">魏晉南北朝時期，佛教石碑大量出現，碑身正面刻佛像，背面刻銘文記錄供養人（出資者）名諱與發願文。此類碑制將宗教功德與個人紀念結合，深刻影響後世墓碑的思想基礎。</div>
+          <div class="stone-caption">來源：Wikimedia Commons / 公有領域</div>
+        </div>
+      </div>
+
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/LugouQiao-Qianlong-bridge-rebuilding-stele-CIMG3609.JPG"
+             alt="乾隆御碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">乾隆御碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">乾隆御製石碑</div>
+          <div class="stone-en">Qianlong Imperial Stele, 18th Century</div>
+          <div class="stone-desc">清代乾隆皇帝（在位 1735–1796）御製石碑，碑首為龍首雕刻，碑身刻有御書銘文，碑座為贔屭龜趺。此類皇帝親撰碑文為清代最高規格碑制，展現「碑以彰德」的傳統。</div>
+          <div class="stone-caption">盧溝橋重修紀念碑，清乾隆時期。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Composite_kaifeng_stone_inscriptions-1-.JPG"
+             alt="開封石刻銘文"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">石刻銘文圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">宋代開封石刻銘文</div>
+          <div class="stone-en">Song Dynasty Stone Inscriptions, Kaifeng</div>
+          <div class="stone-desc">宋代（960–1279）石刻銘文，展現漢字垂直書寫、由右向左的傳統排列方式。此種書寫格式在歷代碑文中一脈相承，台灣清代墓碑沿用同一書寫傳統。</div>
+          <div class="stone-caption">來源：Wikimedia Commons / 公有領域</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 碑的種類 -->
+  <section id="types">
+    <h2>🔍 中國碑刻的主要類型</h2>
+
+    <p>中國傳統石碑依功能分為多種類型，墓碑只是其中一類。了解各種碑的差異，有助於在田野調查時正確辨識：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>碑的種類</th><th>設置位置</th><th>主要功能</th><th>常見形制</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>墓碑</strong></td>
+            <td>墓穴前方</td>
+            <td>標示亡者身份、供後代祭掃</td>
+            <td>素碑（平民）、螭首碑（官員）</td>
+          </tr>
+          <tr>
+            <td><strong>神道碑</strong></td>
+            <td>陵寢神道入口</td>
+            <td>記錄墓主生平功績（官員、王侯）</td>
+            <td>龍首龜趺，碑文長達數千字</td>
+          </tr>
+          <tr>
+            <td><strong>廟碑 / 寺碑</strong></td>
+            <td>廟宇、祠堂内</td>
+            <td>記錄建廟沿革、捐獻者名單</td>
+            <td>長方形素碑或龍首碑</td>
+          </tr>
+          <tr>
+            <td><strong>功德碑</strong></td>
+            <td>公共場所</td>
+            <td>表彰善行（修橋、捐學）</td>
+            <td>尺寸不一，多素碑</td>
+          </tr>
+          <tr>
+            <td><strong>界碑 / 地界碑</strong></td>
+            <td>土地邊界</td>
+            <td>標示產業範圍（與墓碑常相鄰）</td>
+            <td>小型石柱，刻姓氏或界字</td>
+          </tr>
+          <tr>
+            <td><strong>后土碑</strong></td>
+            <td>墓旁一側</td>
+            <td>供奉土地神，祭墓必先拜</td>
+            <td>矮小素碑，刻「后土」二字</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stone-grid">
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Stele_in_Zhaoshan_Temple%2C_14_March_2021I.jpg"
+             alt="廟宇石碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">廟碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">廟宇碑記</div>
+          <div class="stone-en">Temple Commemorative Stele</div>
+          <div class="stone-desc">廟宇碑記通常記錄建廟年代、修繕歷史及捐款芳名錄。台灣清代廟碑格式與墓碑相似，也是研究地方仕紳家族的重要史料——如果鄭家在地方上有捐獻廟宇，附近廟碑可能留有其名。</div>
+          <div class="stone-caption">廟宇石碑實例。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/%E9%99%B8%E8%BB%8D%E4%B8%8A%E5%B0%87%E7%A7%A6%E7%B4%B9%E6%96%87%E5%85%88%E7%94%9F%E6%9A%A8%E5%BE%B7%E9%85%8D%E5%AD%AB%E5%A4%AB%E4%BA%BA%E4%B9%8B%E5%A2%93_20250326.jpg"
+             alt="現代台灣墓碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">台灣墓碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">現代閩南式合葬墓碑</div>
+          <div class="stone-en">Modern Minnan-Style Tomb Marker, Taiwan</div>
+          <div class="stone-desc">台灣現代墓碑沿用閩南格式：墓碑居中，刻「顯考/妣」稱謂；兩側各有小碑，左立功績，右刻立碑人名諱。此案例為合葬碑（夫婦同碑），亦是清代以來閩南大家族的常見形式。</div>
+          <div class="stone-caption">台灣閩南式現代墓碑實例。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 贔屭龜趺 -->
+  <section id="bixi">
+    <h2>🐢 贔屭龜趺：碑座的神話學</h2>
+
+    <blockquote>
+      <strong>贔屭</strong>（音 bì xì），龍生九子之一，形似大龜，性好負重，傳說能承載千年不移——因此成為最理想的石碑碑座，象徵碑文所記之事萬古長存。
+    </blockquote>
+
+    <div class="img-full">
+      <div class="img-full-title">明代神道神獸——贔屭龜趺大石碑（北京明十三陵）</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Lascar_Giant_Bixi_-_Ming_Dynasty_Tombs_%284474802207%29.jpg"
+           alt="明代贔屭大碑"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="stone-img-fallback-full" style="display:none;">圖片無法載入</div>
+      <div class="img-full-caption">明十三陵神道上的巨型贔屭龜趺石碑，碑高數米，碑座為精雕贔屭，四周石欄圍護。此類「龍首龜趺碑」為皇家最高規格，民間不得僭用。<br>來源：Wikimedia Commons / CC BY-SA</div>
+    </div>
+
+    <h3>贔屭與普通龜的區別</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>特徵</th><th>贔屭（碑座）</th><th>普通龜形（墓龜）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>頭部</td><td>龍頭（龍的形象）</td><td>龜頭（一般龜形）</td></tr>
+          <tr><td>功能</td><td>承托石碑，象徵永恆承載</td><td>墓丘造型，象徵長壽、堅固</td></tr>
+          <tr><td>使用等級</td><td>皇族、高官專用</td><td>所有階層均可</td></tr>
+          <tr><td>神話淵源</td><td>龍生九子之傳說</td><td>龜之長壽象徵</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stone-grid">
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Minzu-zhengqi-haoran-changcun-Bixi-3565.jpg"
+             alt="贔屭近景"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">贔屭圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">贔屭龜趺近景</div>
+          <div class="stone-en">Bixi Turtle Base — Close-up</div>
+          <div class="stone-desc">贔屭的背部有碑槽（卯榫結構），石碑插入其中，以贔屭的重量穩固碑身。傳統工匠在製作大型神道碑時，往往先做贔屭，再刻碑身，最後嵌合成一整件。</div>
+          <div class="stone-caption">來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Yan_Miao_-_northern_courtyard_-_Zhizheng_9_-_P1050466.JPG"
+             alt="廟宇石碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">石碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">元代廟庭石碑（至正九年）</div>
+          <div class="stone-en">Yuan Dynasty Temple Stele, 1349 CE</div>
+          <div class="stone-desc">元代廟庭中豎立的石碑，碑身刻記年號「至正九年」（1349 年），展示從元代延續至明清的碑制傳統。台灣清代移民帶來的閩南碑制，正是這一傳統在海外的延伸。</div>
+          <div class="stone-caption">顏廟北院石碑，元至正九年（1349）。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>📌 台灣民間墓的「龜趺」習俗</h4>
+      <p>台灣清代民間雖無資格使用「贔屭龜趺」，但閩南墓葬中發展出平行的「龜」象徵：<strong>墓龜（墓丘）</strong>模仿龜背形態，本身就是龜的象徵。一座有「墓龜」（丘狀墓體）加「金井」（圓形石砌）加「墓手」（弧形雙臂）的閩南大墓，從形制上就完整呼應了「龜負重、龜長壽、龜護祖」的文化象徵。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 碑文結構 -->
+  <section id="structure">
+    <h2>📝 碑文結構詳解</h2>
+
+    <p>傳統閩南式墓碑的碑文遵循嚴格的空間結構，每個區域有固定的內容對應。了解這套結構，是解讀任何台灣清代墓碑的鑰匙。</p>
+
+    <div class="tomb-diagram">
+      <div class="tomb-diagram-title">▌ 閩南式墓碑碑面結構示意圖</div>
+      <div class="tomb-ascii">
+<pre style="font-family:monospace;font-size:13px;line-height:1.8;color:#b4c4d4;">
+┌─────────────────────────────────────┐
+│          ┌─────────────┐            │
+│          │  【橫款】   │            │
+│          │  滎 陽 堂   │  ← 堂號（郡望）
+│          └─────────────┘            │
+│                                      │
+│  ┌────────┐  ┌──────────┐  ┌──────┐│
+│  │【上款】│  │ 【中款】 │  │【下款││
+│  │ 生 卒  │  │ 顯 考    │  │孝 男 ││
+│  │ 年 月  │  │ 鄭 公    │  │○ ○ ││
+│  │ 日 吉  │  │ 諱 ○ ○ │  │○ ○ ││
+│  │        │  │ 之  墓   │  │等  立││
+│  └────────┘  └──────────┘  └──────┘│
+│                                      │
+│          ┌─────────────┐            │
+│          │  【底款】   │            │
+│          │ 清光緒X年   │  ← 建墓年份
+│          │ 季春月吉立  │            │
+│          └─────────────┘            │
+└─────────────────────────────────────┘</pre>
+      </div>
+    </div>
+
+    <div class="annot-grid">
+      <div class="annot-item">
+        <div class="annot-num">① 橫款</div>
+        <div class="annot-term">堂號</div>
+        <div class="annot-sub">刻於碑頂，橫排小字</div>
+        <div class="annot-desc">鄭姓通用「<strong>滎陽堂</strong>」，源自周代鄭國郡望。是最快判斷姓氏的線索，有時還刻有「漳州府龍溪縣」等祖籍地。</div>
+      </div>
+      <div class="annot-item">
+        <div class="annot-num">② 上款</div>
+        <div class="annot-term">生卒年月</div>
+        <div class="annot-sub">碑文左側，較小字</div>
+        <div class="annot-desc">以清代年號記錄亡者生卒，如「生於道光十五年，卒於光緒二年」。若只有卒年，通常意味著立碑時生年已不可考。</div>
+      </div>
+      <div class="annot-item">
+        <div class="annot-num">③ 中款（主銘）</div>
+        <div class="annot-term">顯考 / 顯妣 名諱之墓</div>
+        <div class="annot-sub">碑文正中央，最大字</div>
+        <div class="annot-desc">「<strong>顯考</strong>」（父）或「<strong>顯妣</strong>」（母）加上「OO 公諱 XX 之墓」或「OO 氏孺人之墓」。「諱」後接本名（男性），女性則多僅記氏（如「陳氏」）而不記本名。</div>
+      </div>
+      <div class="annot-item">
+        <div class="annot-num">④ 下款</div>
+        <div class="annot-term">立碑人</div>
+        <div class="annot-sub">碑文右側，較小字</div>
+        <div class="annot-desc">「孝男 ○○ 等立」或「孝孫 ○○ 叩立」。「叩」表示跪拜立碑，「等」表示多人聯名。可從此得知亡者子孫輩的名字。</div>
+      </div>
+      <div class="annot-item">
+        <div class="annot-num">⑤ 底款</div>
+        <div class="annot-term">建墓年份</div>
+        <div class="annot-sub">碑文最底部，小字</div>
+        <div class="annot-desc">用清代年號（如「光緒十二年」= 1886 年）或日治年號（「大正三年」= 1914 年）記錄建墓時間。這是判斷墓葬年代的關鍵依據。</div>
+      </div>
+      <div class="annot-item">
+        <div class="annot-num">⑥ 后土碑</div>
+        <div class="annot-term">后土（土地公小碑）</div>
+        <div class="annot-sub">墓旁獨立小碑</div>
+        <div class="annot-desc">刻「福德正神」或「后土」，供奉守護墓地的土地神。祭掃時必先祭后土再祭亡者。幾乎每座有規模的閩南墓都設有后土碑。</div>
+      </div>
+    </div>
+
+    <h3>常見稱謂一覽</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>稱謂</th><th>對象</th><th>含義</th><th>備註</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>顯考</strong></td><td>亡父</td><td>顯（有德之人）+ 考（父）</td><td>最常見的男性亡者稱謂</td></tr>
+          <tr><td><strong>顯妣</strong></td><td>亡母</td><td>顯（有德之人）+ 妣（母）</td><td>最常見的女性亡者稱謂</td></tr>
+          <tr><td><strong>先考 / 先妣</strong></td><td>父 / 母</td><td>「先」有先行離世之意</td><td>部分地區用「先」代替「顯」</td></tr>
+          <tr><td><strong>孺人</strong></td><td>一般婦女</td><td>清代七品官妻的封號，民間廣泛使用</td><td>台灣幾乎所有已婚婦女死後都稱孺人</td></tr>
+          <tr><td><strong>公</strong></td><td>一般男性</td><td>對男性亡者的尊稱，非官職</td><td>如「鄭公諱○○之墓」</td></tr>
+          <tr><td><strong>府君</strong></td><td>有功名男性</td><td>曾任官職的男性尊稱</td><td>較少見，多用於有科舉功名者</td></tr>
+          <tr><td><strong>祖考 / 祖妣</strong></td><td>祖父 / 祖母</td><td>隔代立碑時使用</td><td>若孫輩立碑，以此稱謂指稱</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 材料與工藝 -->
+  <section id="material">
+    <h2>🛠️ 碑石材料與石刻工藝</h2>
+
+    <h3>台灣清代常用碑石材料</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>石材</th><th>產地</th><th>特性</th><th>使用時期</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>唐山石（花崗岩）</strong></td>
+            <td>福建、廣東沿海</td>
+            <td>堅硬耐久，不易風化，刻工細膩</td>
+            <td>清代最主流，隨移民船來台</td>
+          </tr>
+          <tr>
+            <td><strong>砂岩 / 本地石</strong></td>
+            <td>台灣本地</td>
+            <td>較軟，易刻但也易風化，百年後字跡模糊</td>
+            <td>早期清代，後來漸少用</td>
+          </tr>
+          <tr>
+            <td><strong>泉州白石（白花崗）</strong></td>
+            <td>福建泉州惠安縣</td>
+            <td>白色或灰白，質地純淨，高級墓碑首選</td>
+            <td>清代中後期，富裕仕紳使用</td>
+          </tr>
+          <tr>
+            <td><strong>洗石子（人造石）</strong></td>
+            <td>日本技術引進</td>
+            <td>混凝土加碎石子，耐久性高，可塑形</td>
+            <td>日治時期（1895 年後）開始普及</td>
+          </tr>
+          <tr>
+            <td><strong>黑色花崗岩</strong></td>
+            <td>台灣、進口</td>
+            <td>拋光面呈鏡面，字跡清晰</td>
+            <td>戰後至今最常見的現代墓碑</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>石刻技法</h3>
+    <ul>
+      <li><strong>陰刻（凹刻）</strong>：最常見。字跡向內凹入，字面塗朱砂或金漆，清晰耐久。台灣清代墓碑幾乎全為陰刻。</li>
+      <li><strong>陽刻（凸刻）</strong>：字跡向外突出，常用於龍鳳紋飾或邊框裝飾。</li>
+      <li><strong>減地平雕</strong>：將字跡周邊磨平，使字體呈低浮雕效果，多見於高級碑首裝飾。</li>
+    </ul>
+
+    <div class="info-box">
+      <h4>📌 惠安石匠：台灣碑刻的重要推手</h4>
+      <p>福建泉州惠安縣自古以盛產石匠著稱，「惠安石雕」聞名東南亞。清代大批惠安石匠隨移民來台，在台南、高雄、彰化等地開設「石店」，承接墓碑、廟宇石柱、石獅的雕刻業務。台灣清代高品質的仕紳大墓，其墓碑多半出自惠安師傅之手。判斷方法：石材色澤均勻、字體剛勁、龍鳳紋飾精細者，多為惠安石作。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 台灣清代墓碑 -->
+  <section id="taiwan">
+    <h2>🇹🇼 台灣清代閩南式墓碑的在地特色</h2>
+
+    <p>台灣的閩南式墓碑並非單純移植中國制度，而是在台灣的氣候、社會與文化條件下，發展出若干獨特的在地特色：</p>
+
+    <h3>台灣化的特徵</h3>
+    <ul>
+      <li><strong>祖籍籍貫消失的趨勢</strong>：清初台灣移民墓碑多刻「漳州府龍溪縣」等祖籍；到清末、日治時期，許多墓碑已改以「台灣」或直接省略籍貫，反映在地認同的形成。</li>
+      <li><strong>堂號取代籍貫</strong>：日治初期開始，堂號（如「滎陽堂」）的使用比例急速上升，到日治中期已佔墓碑的 40% 以上，成為台灣閩南墓碑最具辨識性的特徵。</li>
+      <li><strong>夫婦合葬碑</strong>：台灣較早普及「夫婦同碑」的合葬形式，碑面左右分列，中間書「雙人之墓」或並排刻主銘，節省土地也強調夫婦同體。</li>
+      <li><strong>石材在地化</strong>：因清代台灣唐山石運輸成本高，早期移民墓碑有不少使用本地砂岩，字跡較易磨損。富裕家族才能負擔從福建進口的白花崗岩。</li>
+    </ul>
+
+    <div class="stone-grid">
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/%E6%9E%97%E7%BA%8C%E7%A5%96%E5%A2%93%E5%9C%92_20250601.jpg"
+             alt="台灣傳統墓園"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">台灣墓園圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">台灣傳統閩南式墓園</div>
+          <div class="stone-en">Traditional Minnan Cemetery, Taiwan</div>
+          <div class="stone-desc">典型的台灣閩南式家族墓園格局：中央立主碑（顯考/妣），兩側設弧形護牆，前方留墓埕（祭拜空間）。規模較大者另有后土碑、金爐（燒金紙）等配置。</div>
+          <div class="stone-caption">來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="stone-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/%E9%83%AD%E7%81%AB%E7%82%8E%E5%85%88%E7%94%9F%E5%A2%93.jpg"
+             alt="台灣個人墓碑"
+             onerror="this.style.display='none';this.parentElement.querySelector('.stone-img-fallback').style.display='flex'">
+        <div class="stone-img-fallback">台灣墓碑圖<br>（圖片無法載入）</div>
+        <div class="stone-card-body">
+          <div class="stone-name">台灣閩南式個人墓碑</div>
+          <div class="stone-en">Individual Minnan Tombstone, Taiwan</div>
+          <div class="stone-desc">台灣標準個人墓碑格局：正中刻主銘，碑頂有堂號，碑側有生卒年與立碑人。現代墓碑多改用黑色花崗岩拋光面，並附照片，但碑文結構沿用傳統格式。</div>
+          <div class="stone-caption">來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>台灣清代墓碑的常見錯誤辨識</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>常見誤解</th><th>正確理解</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>「孺人」代表墓主是官員妻子</td>
+            <td>清代台灣「孺人」已成通稱，普通已婚婦女皆用，非官職封號</td>
+          </tr>
+          <tr>
+            <td>「諱」後面的字就是本名</td>
+            <td>正確。「諱○○」即亡者本名，避諱之故不輕易直呼，改以「諱」引導</td>
+          </tr>
+          <tr>
+            <td>碑文沒有官職就是平民</td>
+            <td>台灣清代富紳多無官職，但財力足以建大墓；無官職不代表非仕紳</td>
+          </tr>
+          <tr>
+            <td>日治時期建的墓不重要</td>
+            <td>日治時期（1895–1945）仍沿用閩南格式，且文獻保存較好，史料價值高</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 解讀指南 -->
+  <section id="read">
+    <h2>🔎 田野調查實用解讀指南</h2>
+
+    <p>若前往查看林園鄭家大墓或類似清代仕紳墓，以下是現場解讀墓碑的實用步驟：</p>
+
+    <h3>第一步：確認整體格局</h3>
+    <ul>
+      <li>確認是否有「后土碑」→ 判斷是否完整保存</li>
+      <li>觀察墓手（左右弧臂）的跨幅 → 估算墓主社會地位</li>
+      <li>石砌金井是否完整 → 判斷是否有後代定期祭掃</li>
+    </ul>
+
+    <h3>第二步：解讀主碑碑文</h3>
+    <ul>
+      <li>先看頂端橫款 → 確認堂號（鄭家應為「滎陽堂」）</li>
+      <li>看中款主銘 → 確認姓氏、稱謂（顯考/妣）、名諱</li>
+      <li>看底款 → 確認年份（清代 or 日治 or 民國）</li>
+      <li>看下款 → 記錄立碑人名字</li>
+    </ul>
+
+    <h3>第三步：紀錄與攝影建議</h3>
+    <ul>
+      <li>正面光線最佳時段：早晨 8–10 時（側光可顯現陰刻字跡）</li>
+      <li>字跡模糊時：以白粉筆輕描字跡輔助拍攝（不傷石材）</li>
+      <li>拍攝順序：全碑→頂款→主銘→底款→側銘→后土碑</li>
+      <li>記錄 GPS 座標與方位（碑面朝向可輔助判斷山向風水）</li>
+    </ul>
+
+    <div class="info-box">
+      <h4>📌 清代紀年速查：年號 → 西元對照</h4>
+      <div class="table-wrap" style="margin:8px 0 0;">
+        <table>
+          <thead><tr><th>年號</th><th>在位期間</th><th>換算公式</th><th>常見年份</th></tr></thead>
+          <tbody>
+            <tr><td><strong>道光</strong></td><td>1821–1850</td><td>道光 X 年 = 1820 + X</td><td>鄭氏渡台後第三、四代</td></tr>
+            <tr><td><strong>咸豐</strong></td><td>1851–1861</td><td>咸豐 X 年 = 1850 + X</td><td>台灣移民社會穩定期</td></tr>
+            <tr><td><strong>同治</strong></td><td>1862–1875</td><td>同治 X 年 = 1861 + X</td><td>仕紳經濟高峰期</td></tr>
+            <tr><td><strong>光緒</strong></td><td>1875–1908</td><td>光緒 X 年 = 1874 + X</td><td>最可能的鄭家大墓建造期</td></tr>
+            <tr><td><strong>宣統</strong></td><td>1909–1912</td><td>宣統 X 年 = 1908 + X</td><td>清末（台灣已為日本統治）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 與鄭家大墓的關聯 -->
+  <section id="zheng">
+    <h2>🪦 鄭家大墓的墓碑：推測與期待</h2>
+
+    <blockquote>
+      <strong>⚠️ 以下為基於考古習俗的合理推論，非實地拍攝碑文的確認內容。</strong> 鄭家大墓的墓碑碑文尚未完整記錄，以下為依據規格推測的可能形式。
+    </blockquote>
+
+    <h3>依墓葬規格推測的碑文形式</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>碑文位置</th><th>推測內容</th><th>推測依據</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>橫款（頂）</strong></td>
+            <td>滎陽堂</td>
+            <td>鄭姓台灣幾乎通用此堂號</td>
+          </tr>
+          <tr>
+            <td><strong>中款（主銘）</strong></td>
+            <td>顯考鄭公諱○○之墓</td>
+            <td>男性仕紳標準格式（已確認「鄭」姓）</td>
+          </tr>
+          <tr>
+            <td><strong>底款（年份）</strong></td>
+            <td>光緒或同治年間</td>
+            <td>墓葬規格與草坡狀況推估清中後期</td>
+          </tr>
+          <tr>
+            <td><strong>碑石材質</strong></td>
+            <td>唐山花崗岩（推測）</td>
+            <td>仕紳級用石，耐久性高</td>
+          </tr>
+          <tr>
+            <td><strong>碑側裝飾</strong></td>
+            <td>龍紋或雲紋邊框</td>
+            <td>仕紳墓常見，平民不用龍紋</td>
+          </tr>
+          <tr>
+            <td><strong>后土碑</strong></td>
+            <td>應在墓左或墓右另立</td>
+            <td>閩南式大墓標準配置</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>若要進一步查明：建議行動</h3>
+    <ul>
+      <li>聯絡<strong>鳳鼻頭考古教育館</strong>（07-6451327），詢問鄭家大墓是否有館方記錄</li>
+      <li>查閱<strong>《鳳山縣采訪冊》</strong>，清代鳳山縣境仕紳的記錄，可能含鄭氏族人名諱</li>
+      <li>前往<strong>高雄市鄭氏宗親會</strong>詢問中門里（中坑門）鄭氏的族譜記載</li>
+      <li>在<strong>FamilySearch.org</strong> 搜尋「滎陽堂鄭氏族譜」台灣版，部分已數位化可線上查詢</li>
+    </ul>
+
+    <a href="index.html" style="display:inline-block;margin-top:24px;background:#141a22;border:1px solid var(--stone-dark);color:var(--stone);padding:10px 22px;border-radius:6px;text-decoration:none;font-size:14px;">
+      ← 返回 林園鄭家大墓主頁
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="sources-title">📎 出處與參考資料</div>
+
+    <div class="source-item">
+      <span class="source-num">[1]</span>
+      <strong>Wikipedia</strong>〈Stele〉〈Bixi〉〈Chinese stele〉— 石碑歷史演變與贔屭龜趺文化
+      <a href="https://en.wikipedia.org/wiki/Stele" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[2]</span>
+      <strong>Wikipedia</strong>〈碑〉〈墓碑〉— 中文維基百科關於碑刻歷史的整體論述
+      <a href="https://zh.wikipedia.org/wiki/%E7%A2%91" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[3]</span>
+      <strong>TNL 關鍵評論網</strong>〈墓碑不只能刻字，解鎖祖墳設計的功能與含意〉— 台灣傳統墓碑格式與意義解讀
+      <a href="https://www.thenewslens.com/article/116747" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[4]</span>
+      <strong>BIOS monthly</strong>〈有墓共睹：5 座台灣特殊墳墓的文史及美學賞析〉｜徐逸鴻 著
+      <a href="https://www.biosmonthly.com/article/11245" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[5]</span>
+      <strong>Wikimedia Commons</strong> — 本頁所有圖片均為 CC BY-SA 授權或公有領域
+      <a href="https://commons.wikimedia.org" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[6]</span>
+      <strong>黃阿有</strong>〈嘉義市市定古蹟葉明邨墓形制與墓主之研究〉，文化部文化資產局考古學期刊 — 台灣清代仕紳墓碑格式研究
+    </div>
+    <div class="source-item">
+      <span class="source-num">[7]</span>
+      <strong>人民網文化頻道</strong>〈滎陽鄭氏遍天下 天下鄭氏會中原〉— 滎陽鄭氏源流
+      <a href="http://culture.people.com.cn/BIG5/n/2014/0313/c22219-24627932.html" target="_blank">查看來源</a>
+    </div>
+
+    <p style="margin-top:28px;font-size:12px;color:var(--muted);text-align:center;">
+      資料整理：2026-06-13 ｜ Claude Code 輔助研究<br>
+      本頁部分內容為學術推論，圖片均來自公共授權資源。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
