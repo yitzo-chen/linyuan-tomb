@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陪葬玉器圖錄 — 林園鄭家大墓研究</title>
+  <style>
+    :root {
+      --bg: #1a1510;
+      --surface: #251e16;
+      --card: #2e2518;
+      --accent: #c9a86c;
+      --accent2: #8b6e45;
+      --text: #e8dcc8;
+      --muted: #9e8e74;
+      --quote-bg: #332b1e;
+      --border: #4a3e2e;
+      --tag-bg: #3d3020;
+      --jade: #4a9e7a;
+      --jade-dark: #2d6b52;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif TC', 'Georgia', serif;
+      line-height: 1.85;
+      font-size: 16px;
+    }
+    header {
+      background: linear-gradient(180deg, #071109 0%, #121a13 60%, var(--surface) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    .header-badge {
+      display: inline-block;
+      background: #0e2218;
+      border: 1px solid var(--jade-dark);
+      color: var(--jade);
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    h1 { font-size: clamp(22px, 4vw, 34px); color: var(--jade); letter-spacing: 1px; line-height: 1.4; margin-bottom: 12px; }
+    .subtitle { color: var(--muted); font-size: 14px; letter-spacing: 1px; }
+    .back-link { display: inline-block; margin-top: 16px; color: var(--accent2); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav a {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 12px 16px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover { color: var(--jade); border-bottom-color: var(--jade); }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+    section { margin-bottom: 60px; }
+    h2 {
+      font-size: 20px;
+      color: var(--jade);
+      border-left: 4px solid var(--jade-dark);
+      padding-left: 14px;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    h3 { font-size: 16px; color: #6fcca4; margin: 28px 0 12px; padding-left: 6px; border-left: 2px solid var(--jade-dark); }
+    p { margin-bottom: 16px; }
+    blockquote {
+      background: #0e2218;
+      border-left: 4px solid var(--jade-dark);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 15px;
+    }
+    blockquote strong { color: var(--jade); }
+    ul, ol { padding-left: 22px; margin: 12px 0 16px; }
+    li { margin-bottom: 8px; }
+    li strong { color: var(--jade); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+    /* Timeline */
+    .timeline { margin: 16px 0; }
+    .tl-item { display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-start; }
+    .tl-era {
+      min-width: 100px;
+      background: #0e2218;
+      border: 1px solid var(--jade-dark);
+      color: var(--jade);
+      font-size: 12px;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .tl-text { flex: 1; font-size: 15px; }
+    /* Jade item cards */
+    .jade-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
+    .jade-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .jade-card:hover { border-color: var(--jade-dark); }
+    .jade-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #0a1208;
+      display: block;
+    }
+    .jade-img-fallback {
+      width: 100%;
+      height: 220px;
+      background: #0a1208;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+    }
+    .jade-card-body { padding: 16px; }
+    .jade-name { color: var(--jade); font-size: 16px; font-weight: bold; margin-bottom: 4px; }
+    .jade-cn { color: var(--muted); font-size: 12px; margin-bottom: 10px; letter-spacing: 1px; }
+    .jade-desc { font-size: 14px; color: var(--text); line-height: 1.7; }
+    .jade-caption { font-size: 11px; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); font-style: italic; }
+    /* Full-width image block */
+    .img-full {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .img-full img { width: 100%; max-height: 500px; object-fit: contain; background: #0a1208; display: block; }
+    .img-full-title { padding: 14px 18px 6px; font-size: 15px; color: var(--jade); font-weight: bold; }
+    .img-full-caption { padding: 8px 18px 16px; font-size: 13px; color: var(--muted); font-style: italic; }
+    /* Table */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: #0e2218; color: var(--jade); padding: 10px 16px; text-align: left; border: 1px solid var(--border); letter-spacing: 0.5px; }
+    td { padding: 10px 16px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
+    tr:nth-child(even) td { background: #141e14; }
+    td strong { color: var(--jade); }
+    /* Info box */
+    .info-box {
+      background: #0e2218;
+      border: 1px solid var(--jade-dark);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .info-box h4 { color: var(--jade); font-size: 14px; margin-bottom: 10px; letter-spacing: 0.5px; }
+    .info-box p, .info-box li { font-size: 14px; }
+    /* Grade badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 6px;
+    }
+    .badge-gold { background: #2e2200; color: #f5c842; border: 1px solid #7a5e00; }
+    .badge-silver { background: #1e2025; color: #b0b8c8; border: 1px solid #4a5060; }
+    .badge-bronze { background: #1e1408; color: #cd7f32; border: 1px solid #6a3f10; }
+    .badge-common { background: var(--tag-bg); color: var(--muted); border: 1px solid var(--border); }
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .sources-title { color: var(--jade); font-size: 16px; font-weight: bold; margin-bottom: 20px; padding-left: 14px; border-left: 4px solid var(--jade-dark); }
+    .source-item { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; font-size: 13px; }
+    .source-item a { color: var(--accent2); }
+    .source-num { color: var(--jade); font-weight: bold; margin-right: 8px; }
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      .jade-grid { grid-template-columns: 1fr; }
+      main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">陪葬玉器研究 · 文物圖錄</div>
+  <h1>🪨 陪葬玉器圖錄</h1>
+  <p class="subtitle">中國古代葬玉文化 — 從新石器時代到清代</p>
+  <a class="back-link" href="index.html">← 返回 林園鄭家大墓主頁</a>
+</header>
+
+<nav>
+  <a href="#intro">概論</a>
+  <a href="#history">歷史演變</a>
+  <a href="#items">各類葬玉</a>
+  <a href="#suit">金縷玉衣</a>
+  <a href="#grade">等級制度</a>
+  <a href="#taiwan">台灣清代習俗</a>
+  <a href="#zheng">與鄭家大墓的關聯</a>
+  <a href="#sources">出處</a>
+</nav>
+
+<main>
+
+  <!-- 概論 -->
+  <section id="intro">
+    <h2>🌿 什麼是陪葬玉？</h2>
+
+    <blockquote>
+      <strong>葬玉</strong>，是中國古代喪葬習俗中，以玉器隨葬以保護遺體、防止腐朽，並象徵身份地位與通往彼世的禮器。從距今六千年前的新石器時代開始，「以玉事死」的觀念貫穿中國歷史三千餘年。
+    </blockquote>
+
+    <p>古人相信玉有三種神奇功效：</p>
+    <ul>
+      <li><strong>防腐不朽</strong>：玉器包覆全身，阻斷外部空氣與細菌侵入</li>
+      <li><strong>封鎖精氣</strong>：以玉塞住「九竅」，使體內精氣不散逸</li>
+      <li><strong>通天引魂</strong>：玉璧代表「天」，引導亡魂升入仙界</li>
+    </ul>
+
+    <div class="img-full">
+      <div class="img-full-title">金縷玉衣全覽——西漢中山靖王劉勝墓（約 113 BCE）</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Liu_Sheng%27s_Jade_Burial_Suit_with_Gold_Thread.jpg"
+           alt="劉勝金縷玉衣"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="jade-img-fallback">圖片無法載入（請至 Wikipedia〈金縷玉衣〉條目查看）</div>
+      <div class="img-full-caption">共 2,498 片玉片、以金絲串連，重約 1.1 公斤，製作耗時估計長達 10 年。現藏河北省博物館。<br>來源：Wikimedia Commons / CC BY-SA 授權</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 歷史演變 -->
+  <section id="history">
+    <h2>📜 葬玉的歷史演變</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-era">新石器時代<br>6000–4000 年前</div>
+        <div class="tl-text">玉器作為禮器隨葬，以玉璧、玉琮、玉鉞為主，代表身份與神聖地位。良渚文化（今浙江）出土大量玉琮，為此期代表。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">商周<br>1600–256 BCE</div>
+        <div class="tl-text">玉器兼具禮器與護身符功能。玉握（手握玉）、玉含（口含玉蟬）習俗出現。「君子比德於玉」，玉成為道德的象徵。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">春秋戰國<br>770–221 BCE</div>
+        <div class="tl-text">玉覆面、局部耳塞、鼻塞零星出現。諸侯競相以玉彰顯地位，玉器工藝達到第一個高峰。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">西漢<br>206 BCE–25 CE</div>
+        <div class="tl-text">葬玉制度化、規格化。九竅塞完整形制確立，金縷玉衣（帝王）、銀縷玉衣（諸侯王）、銅縷玉衣（列侯）嚴格按等級使用。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">東漢<br>25–220 CE</div>
+        <div class="tl-text">曹操下令禁止玉衣厚葬，玉衣制度廢除。玉含、玉握等局部用玉習俗仍延續。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">魏晉至唐宋<br>220–1279 CE</div>
+        <div class="tl-text">葬玉簡化，改以銅鏡、陶俑為主要陪葬品。玉器轉向裝飾用途，陪葬玉退為個人飾品隨葬。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-era">明清至近代<br>1368–1949 CE</div>
+        <div class="tl-text">閩南、台灣漢人以個人隨身玉飾（玉鐲、玉佩）陪葬為主，口含銅錢或小玉件延續古制。大規模葬玉制度已不存在。</div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 各類葬玉 -->
+  <section id="items">
+    <h2>🔍 各類陪葬玉器圖解</h2>
+
+    <div class="jade-grid">
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Jade_Bi_Disc%2C_Longshan-Qijia_System%2C_2500-1700_BC.jpg"
+             alt="玉璧"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉璧示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉璧</div>
+          <div class="jade-cn">Jade Bi Disc</div>
+          <div class="jade-desc">圓形中央有孔的扁平玉器，象徵「天」。置於死者胸腹，引魂升天。從新石器時代到漢代皆有使用，是最重要的禮器。</div>
+          <div class="jade-caption">來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Chinese_-_Cicada-Shaped_Amulet_%28Han_Han%29_-_Walters_71456.jpg/800px-Chinese_-_Cicada-Shaped_Amulet_%28Han_Han%29_-_Walters_71456.jpg"
+             alt="玉蟬（玉琀）"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉蟬示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉琀（玉蟬）</div>
+          <div class="jade-cn">Jade Cicada / Mouth Piece</div>
+          <div class="jade-desc">置於死者口中的小玉件，漢代盛行以蟬形為主。蟬象徵「蛻變與重生」——脫殼而生，如靈魂轉世。口含玉可防腐，並讓亡者來世不虞匱乏。</div>
+          <div class="jade-caption">漢代玉蟬，現藏華特斯藝術博物館。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Jade_grip%2C_Eastern_Han_dynasty%2C_25-220_AD%2C_jade_-_Sackler_Museum_-_DSC02888.JPG/800px-Jade_grip%2C_Eastern_Han_dynasty%2C_25-220_AD%2C_jade_-_Sackler_Museum_-_DSC02888.JPG"
+             alt="玉握"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉握示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉握</div>
+          <div class="jade-cn">Jade Grip / Hand Piece</div>
+          <div class="jade-desc">握於死者雙手中的玉器，通常為豬形（玉豬）或柱形。「手不空握」象徵死後不貧窮。東漢玉握多為豬形，寓意財富豐盈。</div>
+          <div class="jade-caption">東漢玉握，現藏沙可樂博物館。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Han_Dynasty_jade_suit.jpg/800px-Han_Dynasty_jade_suit.jpg"
+             alt="玉衣局部"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉衣局部示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉衣（局部）</div>
+          <div class="jade-cn">Jade Burial Suit — Detail</div>
+          <div class="jade-desc">數千片方形玉片以金、銀、銅絲穿連而成，完整包覆全身。工匠需先將玉片磨至薄片、鑽四角小孔，再一片片串連，工程浩大。</div>
+          <div class="jade-caption">漢代玉衣局部。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Jade_plugs_for_the_nine_orifices%2C_Western_Han_dynasty%2C_Nanjing_Museum.jpg/800px-Jade_plugs_for_the_nine_orifices%2C_Western_Han_dynasty%2C_Nanjing_Museum.jpg"
+             alt="九竅塞"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">九竅塞示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">九竅塞</div>
+          <div class="jade-cn">Nine Orifice Plugs</div>
+          <div class="jade-desc">塞住人體九個孔竅（眼×2、耳×2、鼻×2、口、肛門、生殖器）的玉塞，防止精氣外逸。西漢中山靖王劉勝夫婦墓為最早出土完整九竅塞的案例。</div>
+          <div class="jade-caption">西漢九竅塞，現藏南京博物院。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Jade_pectoral_ornament%2C_Western_Zhou_period%2C_1050-771_BC%2C_jade_-_Sackler_Museum_-_DSC02714.JPG/800px-Jade_pectoral_ornament%2C_Western_Zhou_period%2C_1050-771_BC%2C_jade_-_Sackler_Museum_-_DSC02714.JPG"
+             alt="玉覆面組件"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉覆面組件示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉覆面 / 玉飾件</div>
+          <div class="jade-cn">Jade Pectoral / Face Cover</div>
+          <div class="jade-desc">覆蓋在死者臉部或胸部的玉器組合件，由多塊不同形狀的玉片拼成人臉輪廓。保護顏面不朽，並彰顯身份。西周貴族墓中多見。</div>
+          <div class="jade-caption">西周玉飾件，現藏沙可樂博物館。來源：Wikimedia Commons / CC BY-SA</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 金縷玉衣專區 -->
+  <section id="suit">
+    <h2>✨ 金縷玉衣——葬玉的最高形式</h2>
+
+    <p>金縷玉衣是漢代皇族、諸侯王專用的喪葬殊榮，代表中國葬玉文化發展的最高峰。</p>
+
+    <div class="img-full">
+      <div class="img-full-title">竇綰銀縷玉衣（劉勝妻）——西漢中山靖王墓</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Dou_Wan_jade_suit.jpg"
+           alt="竇綰銀縷玉衣"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="jade-img-fallback" style="display:none;height:300px;">圖片無法載入</div>
+      <div class="img-full-caption">諸侯王妃使用銀縷，共 2,160 片玉片。與劉勝金縷玉衣同出一墓，1968 年在河北省滿城縣出土，轟動考古學界。<br>來源：Wikimedia Commons / CC BY-SA 授權</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>等級</th>
+            <th>使用者</th>
+            <th>絲線材質</th>
+            <th>玉片數（約）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>金縷玉衣</strong> <span class="badge badge-gold">最高</span></td>
+            <td>皇帝</td>
+            <td>金絲</td>
+            <td>2,400–2,700 片</td>
+          </tr>
+          <tr>
+            <td><strong>銀縷玉衣</strong> <span class="badge badge-silver">次級</span></td>
+            <td>諸侯王、列侯、皇帝近親</td>
+            <td>銀絲</td>
+            <td>2,000–2,500 片</td>
+          </tr>
+          <tr>
+            <td><strong>銅縷玉衣</strong> <span class="badge badge-bronze">三級</span></td>
+            <td>列侯、高官</td>
+            <td>銅絲</td>
+            <td>1,500–2,000 片</td>
+          </tr>
+          <tr>
+            <td><strong>無玉衣</strong> <span class="badge badge-common">一般</span></td>
+            <td>一般貴族至平民</td>
+            <td>—</td>
+            <td>以玉握、玉琀等局部用玉</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <h4>📌 為何東漢後玉衣消失？</h4>
+      <p>220 年曹操以「厚葬無益，徒為盜賊之資」為由，明令禁止以玉衣下葬。此後玉衣制度瓦解，但玉握、玉蟬等小件葬玉仍延續使用。考古發掘也證明，許多漢代玉衣墓確實遭到盜掘——盜墓賊對玉片的貪圖，反而加速了這項制度的終結。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 台灣清代習俗 -->
+  <section id="taiwan">
+    <h2>🇹🇼 台灣清代的葬玉習俗</h2>
+
+    <p>清代台灣閩南移民的葬玉習俗，相較於漢代已大幅簡化，主要表現在個人隨身飾品陪葬：</p>
+
+    <div class="jade-grid">
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Jade_bangle_-_jade_bracelet.jpg/800px-Jade_bangle_-_jade_bracelet.jpg"
+             alt="玉鐲"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉鐲示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉鐲</div>
+          <div class="jade-cn">Jade Bangle</div>
+          <div class="jade-desc">台灣清代女性最常見的陪葬玉。彰化鹿港清代墓葬出土記錄顯示，玉鐲是最普遍的隨葬品。生前配戴，死後隨葬，象徵財富延續。</div>
+          <div class="jade-caption">清代台灣閩南婦女常見配飾</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Jade_pendants.jpg/800px-Jade_pendants.jpg"
+             alt="玉佩"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉佩示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">玉佩 / 玉墜</div>
+          <div class="jade-cn">Jade Pendant</div>
+          <div class="jade-desc">懸掛於腰間或胸前的玉飾，仕紳階層常見。形制多樣，有平安扣、觀音牌、龍形等，隨身配戴後直接陪葬。</div>
+          <div class="jade-caption">清代常見玉佩樣式</div>
+        </div>
+      </div>
+
+      <div class="jade-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Jadeite_cabochon.jpg/800px-Jadeite_cabochon.jpg"
+             alt="口含玉件"
+             onerror="this.style.display='none';this.parentElement.querySelector('.jade-img-fallback').style.display='flex'">
+        <div class="jade-img-fallback">玉件示意圖<br>（外部圖片無法載入）</div>
+        <div class="jade-card-body">
+          <div class="jade-name">口含玉（變形玉琀）</div>
+          <div class="jade-cn">Mouth Piece</div>
+          <div class="jade-desc">清代台灣延續漢代「口含」習俗，但改以銅錢或小玉件替代玉蟬。富裕家族仍有以小玉片或玉珠置於口中的習俗。</div>
+          <div class="jade-caption">清代玉琀的簡化形式</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h4>📌 翡翠與軟玉——清代的玉材轉變</h4>
+      <p>中國古代葬玉多用<strong>軟玉（和田玉）</strong>，以青玉、白玉為貴。清代因滿洲與緬甸貿易開通，<strong>翡翠（硬玉）</strong>開始大量進入市場，尤其受到漢族仕紳和旗人喜愛。清代台灣仕紳陪葬的玉器，可能已包含翡翠製品，而非傳統和田玉。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 與鄭家大墓的關聯 -->
+  <section id="zheng">
+    <h2>🪦 與林園鄭家大墓的可能關聯</h2>
+
+    <blockquote>
+      <strong>⚠️ 以下為基於史料與考古習俗的合理推論，並非實地發掘結果。</strong> 鄭家大墓未經正式考古調查，內部陪葬品現況未知。
+    </blockquote>
+
+    <p>依據鄭家大墓的墓葬規格（仕紳地主級，墓手跨度 30m+），若此墓為清中期所建，可能出現以下陪葬玉器：</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>可能的陪葬玉</th>
+            <th>機率評估</th>
+            <th>說明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>玉鐲</strong></td>
+            <td>高</td>
+            <td>清代閩南仕紳家族女性成員必備，極可能隨葬</td>
+          </tr>
+          <tr>
+            <td><strong>玉佩、玉墜</strong></td>
+            <td>高</td>
+            <td>仕紳階層男女皆有，隨身飾品直接陪葬</td>
+          </tr>
+          <tr>
+            <td><strong>口含玉（小玉件或銅錢）</strong></td>
+            <td>中</td>
+            <td>閩南習俗延續，但有的已改用銅錢替代</td>
+          </tr>
+          <tr>
+            <td><strong>翡翠飾品</strong></td>
+            <td>中</td>
+            <td>清中期後翡翠盛行，南部仕紳有能力取得</td>
+          </tr>
+          <tr>
+            <td>金縷/九竅塞等漢制葬玉</td>
+            <td>極低</td>
+            <td>清代已無此習俗，不太可能出現</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:20px; color: var(--muted); font-size: 14px;">
+      若有意進一步了解鄭家大墓的歷史，建議聯繫鳳鼻頭考古教育館（07-6451327）或查閱《鳳山縣采訪冊》等清代地方文獻，可能有相關家族史料記載。
+    </p>
+
+    <a href="index.html" style="display:inline-block;margin-top:20px;background:#0e2218;border:1px solid var(--jade-dark);color:var(--jade);padding:10px 22px;border-radius:6px;text-decoration:none;font-size:14px;">
+      ← 返回 林園鄭家大墓主頁
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="sources-title">📎 出處與參考資料</div>
+
+    <div class="source-item">
+      <span class="source-num">[1]</span>
+      <strong>中國文化研究院</strong>〈為何古人愛以玉器陪葬？〉
+      <a href="https://chiculture.org.hk/tc/china-five-thousand-years/775" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[2]</span>
+      <strong>知乎</strong>〈古代丧葬用玉有多夸张？没有玉器下葬恐怕"死不瞑目"〉
+      <a href="https://zhuanlan.zhihu.com/p/152039875" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[3]</span>
+      <strong>Wikipedia</strong>〈Jade burial suit〉— 金縷玉衣等級制度與圖片
+      <a href="https://en.wikipedia.org/wiki/Jade_burial_suit" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[4]</span>
+      <strong>Wikimedia Commons</strong> — 玉器圖片，各圖均為 CC BY-SA 授權
+      <a href="https://commons.wikimedia.org" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[5]</span>
+      <strong>National Geographic</strong> 〈China Han dynasty jade tombs〉
+      <a href="https://www.nationalgeographic.com/history/article/china-han-dynasty-jade-tombs" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[6]</span>
+      <strong>Asian Art Museum</strong>〈Cicada — Jade mouth piece〉
+      <a href="https://education.asianart.org/resources/cicada/" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[7]</span>
+      <strong>報導者</strong>〈看，毀滅中的老墓──台灣地下文資浩劫紀實〉
+      <a href="https://www.twreporter.org/a/cemetery-heritage-destruction" target="_blank">查看來源</a>
+    </div>
+
+    <p style="margin-top:28px;font-size:12px;color:var(--muted);text-align:center;">
+      資料整理：2026-06-13 ｜ Claude Code 輔助研究<br>
+      本頁部分內容為學術推論，圖片均來自公共授權資源。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
