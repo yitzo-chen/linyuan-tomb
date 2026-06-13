@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>林園鄭家大墓 — 鳳鼻頭考古館旁清代仕紳墓研究</title>
+  <style>
+    :root {
+      --bg: #1a1510;
+      --surface: #251e16;
+      --card: #2e2518;
+      --accent: #c9a86c;
+      --accent2: #8b6e45;
+      --text: #e8dcc8;
+      --muted: #9e8e74;
+      --quote-bg: #332b1e;
+      --border: #4a3e2e;
+      --tag-bg: #3d3020;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif TC', 'Georgia', serif;
+      line-height: 1.85;
+      font-size: 16px;
+    }
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #0d0b07 0%, var(--surface) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    .header-badge {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid var(--accent2);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(22px, 4vw, 36px);
+      color: var(--accent);
+      letter-spacing: 1px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    /* Nav */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav a {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 12px 16px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    /* Main */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    section { margin-bottom: 56px; }
+    h2 {
+      font-size: 20px;
+      color: var(--accent);
+      border-left: 4px solid var(--accent2);
+      padding-left: 14px;
+      margin-bottom: 20px;
+      margin-top: 48px;
+    }
+    h3 {
+      font-size: 16px;
+      color: #d4b87a;
+      margin: 28px 0 12px;
+      padding-left: 6px;
+      border-left: 2px solid var(--accent2);
+    }
+    p { margin-bottom: 16px; color: var(--text); }
+    /* Info block */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .info-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 18px;
+    }
+    .info-label {
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .info-value { font-size: 15px; color: var(--text); }
+    .info-value a { color: var(--accent2); text-decoration: underline; }
+    /* Quote */
+    blockquote {
+      background: var(--quote-bg);
+      border-left: 4px solid var(--accent2);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 15px;
+      color: var(--text);
+    }
+    blockquote strong { color: var(--accent); }
+    /* Lists */
+    ul, ol {
+      padding-left: 22px;
+      margin: 12px 0 16px;
+    }
+    li { margin-bottom: 8px; }
+    li strong { color: var(--accent); }
+    /* Table */
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      background: var(--tag-bg);
+      color: var(--accent);
+      padding: 10px 16px;
+      text-align: left;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--quote-bg); }
+    td strong { color: var(--accent); }
+    /* Images */
+    .img-block {
+      margin: 28px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .img-block img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      background: #111;
+      display: block;
+    }
+    .img-caption {
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      border-top: 1px solid var(--border);
+    }
+    .img-title {
+      padding: 12px 16px 4px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    /* Timeline */
+    .timeline { margin: 16px 0; }
+    .tl-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .tl-year {
+      min-width: 70px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: bold;
+      padding-top: 2px;
+    }
+    .tl-text { flex: 1; font-size: 15px; }
+    /* Supplement */
+    .supplement-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+    .supplement-box h4 {
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+    /* Tags */
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid var(--accent2);
+      color: var(--accent);
+      font-size: 11px;
+      padding: 2px 10px;
+      border-radius: 3px;
+      margin: 2px;
+    }
+    /* Divider */
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .sources-title {
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      padding-left: 14px;
+      border-left: 4px solid var(--accent2);
+    }
+    .source-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .source-item a { color: var(--accent2); }
+    .source-num {
+      color: var(--accent);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .note-box {
+      background: #1e1608;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      h2 { font-size: 17px; }
+      main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">田野調查報告 · 2026-06-12</div>
+  <h1>🪦 林園鄭家大墓</h1>
+  <p class="subtitle">鳳鼻頭考古館旁清代仕紳墓研究</p>
+  <p class="subtitle" style="margin-top:8px">高雄市林園區中門里 · 22.5124°N, 120.3697°E</p>
+</header>
+
+<nav>
+  <a href="#info">基本資訊</a>
+  <a href="#geo">地理背景</a>
+  <a href="#form">墓葬形制</a>
+  <a href="#parts">各構件說明</a>
+  <a href="#spiral">旋轉土丘</a>
+  <a href="#grade">等級評估</a>
+  <a href="#history">歷史推測</a>
+  <a href="#supplement">延伸研究</a>
+  <a href="#gallery">參考圖片</a>
+  <a href="#unknown">待查資訊</a>
+  <a href="#sources">出處</a>
+</nav>
+
+<main>
+
+  <!-- 基本資訊 -->
+  <section id="info">
+    <h2>📍 基本資訊</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">位置</div>
+        <div class="info-value">高雄市林園區<strong>中門里</strong>，鳳鼻頭考古教育館正旁</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">座標</div>
+        <div class="info-value">22.5124°N, 120.3697°E</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">確認姓氏</div>
+        <div class="info-value">鄭（墓碑親眼確認）</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">OSM 編號</div>
+        <div class="info-value"><a href="https://www.openstreetmap.org/way/224096020" target="_blank">way #224096020</a></div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Street View</div>
+        <div class="info-value"><a href="https://maps.app.goo.gl/Vy6ZgJe42QtrUKXK7" target="_blank">Google Maps 街景（2022年5月）</a></div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">調查日期</div>
+        <div class="info-value">2026-06-12</div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 地理背景 -->
+  <section id="geo">
+    <h2>🗺️ 地理背景</h2>
+    <p>鳳鼻頭丘陵位於鳳山丘陵最南端，是高雄市林園區<strong>中門里</strong>的制高地形。此地同時是台灣國定考古遺址「鳳鼻頭（中坑門）遺址」所在地，面積 9.7 公頃，98% 為<strong>私有地</strong>。這座鄭家大墓正位於遺址範圍內的私有丘陵地上。</p>
+
+    <div class="supplement-box">
+      <h4>📌 鳳鼻頭（中坑門）考古遺址背景</h4>
+      <p style="font-size:14px; margin-bottom:8px;">鳳鼻頭遺址為史前至清代多層位遺址，文化層包含：</p>
+      <ul style="font-size:14px;">
+        <li><strong>繩紋紅陶文化</strong>（約 5000 年前）：台灣最早期新石器時代文化之一</li>
+        <li><strong>大坌坑文化</strong>（約 6500 年前）：台灣最古老史前文化</li>
+        <li><strong>清代漢人文化層</strong>：與鄭家大墓同時期或稍早</li>
+      </ul>
+      <p style="font-size:13px; color: var(--muted); margin-top:8px;">遺址於 1965 年由日本學者鹿野忠雄首次調查，後列為國定遺址。鄭家大墓建於此遺址範圍內，見證了史前聖地與清代漢人文明的時空疊合。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 墓葬形制 -->
+  <section id="form">
+    <h2>🏛️ 墓葬形制：清代閩南式「太師椅」大墓</h2>
+
+    <blockquote>
+      <strong>💡 形制說明</strong>：從高空看，整座墓的輪廓像一把巨大的扶手椅，閩南語稱「太師椅」形，是清代台灣富紳最高規格的墓葬形式。
+    </blockquote>
+
+    <p>各部構件由內而外分布如下：</p>
+    <ul>
+      <li><strong>中心</strong>：墓龜（大土丘）＋ 金井（圓形石砌祭壇）＋ 墓碑</li>
+      <li><strong>第一層</strong>：墓手（左青龍弧臂、右白虎弧臂）</li>
+      <li><strong>第二層</strong>：外砂（環抱土丘）</li>
+      <li><strong>整體</strong>：多層草坡土丘旋繞，形成「砂龍環抱」地勢</li>
+    </ul>
+
+    <div class="supplement-box">
+      <h4>📌 太師椅形墓葬的歷史背景</h4>
+      <p style="font-size:14px;">「太師椅形」墓葬源自中國福建、廣東閩南地區，隨著清代漢人移民帶入台灣。其形制特色在於模仿太師椅的扶手椅輪廓——中央為「座位」（墓龜），兩側「扶手」為弧形墓手，後方「椅背」為靠山，前方開闊的「椅前空地」即明堂。這種形制在台灣清代墓葬中，代表墓主具有相當的社會地位與財力，非一般庶民可負擔。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 各構件說明 -->
+  <section id="parts">
+    <h2>🔍 各構件詳細說明</h2>
+
+    <h3>1. 墓丘（墓龜）</h3>
+    <p>台語稱「墓龜」，因形似烏龜背而得名。中央圓形大土丘內部即為<strong>棺木埋葬處</strong>。這座墓龜規模特別龐大，草坡維護整齊，顯示後代持續有人祭掃。</p>
+
+    <h3>2. 金井（圓形石砌區域）</h3>
+    <p>Street View 可清楚見到的<strong>橘褐色圓形石砌平台</strong>，是祭拜擺放祭品、燒金紙的核心空間。正中央立有墓碑，刻有「鄭」姓。</p>
+
+    <h3>3. 墓碑</h3>
+    <p>立於金井中央。傳統閩南墓碑通常刻有：</p>
+    <ul>
+      <li><strong>堂號</strong>（鄭氏常見堂號為「滎陽堂」）</li>
+      <li><strong>顯考/顯妣 OO 公/孺人之墓</strong></li>
+      <li><strong>立碑人</strong>（子孫名）</li>
+      <li><strong>建墓年份</strong>（清代紀年或民國紀年）</li>
+    </ul>
+
+    <div class="supplement-box">
+      <h4>📌 滎陽堂——鄭氏的郡望堂號</h4>
+      <p style="font-size:14px;">鄭姓源自周代鄭國，郡望為「滎陽」（今河南省滎陽市）。台灣鄭姓移民絕大多數來自福建漳州、泉州，渡台後仍以「滎陽堂」為堂號，標示血脈傳承。鄭成功（國姓爺）本身即為鄭姓，其後裔及部屬在台灣各地均有滎陽堂鄭氏族群。</p>
+    </div>
+
+    <h3>4. 墓手（弧形雙臂）</h3>
+    <p>左右兩道弧形延伸的草坡土丘，風水上稱「青龍手」（左）和「白虎手」（右）。<strong>這座墓的墓手跨度極廣，目測超過 30 公尺</strong>，是仕紳富紳規格的重要指標。</p>
+
+    <h3>5. 后土（后土公）</h3>
+    <p>通常於墓旁另立小石碑供奉土地神，每次祭墓必須先拜。</p>
+  </section>
+
+  <hr>
+
+  <!-- 旋轉土丘 -->
+  <section id="spiral">
+    <h2>🌀 最特殊的地方：旋轉環繞土丘</h2>
+
+    <blockquote>
+      <strong>🔥 這是這座墓最罕見的特徵</strong>：周邊有多層草坡土丘<strong>呈旋繞流動態勢</strong>環抱墓穴，並非一般大墓的對稱弧臂，而是像龍脈蜿蜒而來、層層纏繞的感覺。
+    </blockquote>
+
+    <h3>風水術語解釋</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>術語</th><th>說明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>砂龍環抱</strong></td><td>多層弧形土丘旋繞，把地氣「鎖住」不散逸</td></tr>
+          <tr><td><strong>龍盤虎踞</strong></td><td>最高等級地理形勢，代表龍脈聚氣於穴</td></tr>
+          <tr><td><strong>來龍入首</strong></td><td>地氣從丘陵蜿蜒而來，在此收束入穴</td></tr>
+          <tr><td><strong>砂水有情</strong></td><td>砂（土丘）順勢環抱，形勢向內聚合</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>為何這裡能形成此地形？</h3>
+    <p>鳳鼻頭丘陵本身的天然地形提供了多條蜿蜒砂脈。這支鄭家當初選址時，很可能請<strong>地理師（風水師）</strong>相地，找到「砂龍環抱、前朝開闊」的穴場：</p>
+    <ul>
+      <li><strong>後靠</strong>：鳳鼻頭丘陵（靠山）</li>
+      <li><strong>前朝</strong>：台灣海峽方向開闊（明堂寬廣）</li>
+      <li><strong>左右</strong>：天然砂丘環抱</li>
+      <li><strong>旋繞</strong>：多層土丘「關鎖」，氣不散逸</li>
+    </ul>
+
+    <h3>罕見程度</h3>
+    <p>台灣清代大墓中能有<strong>天然多層砂龍旋繞</strong>的穴場極為罕見。多數名墓（如陳中和墓）靠人工石材堆砌出形制；這座鄭家墓更多借助<strong>天然丘陵地形</strong>，更接近中國傳統堪輿的最高理想。</p>
+  </section>
+
+  <hr>
+
+  <!-- 墓葬等級評估 -->
+  <section id="grade">
+    <h2>📊 墓葬等級評估</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>特徵</th><th>狀況</th><th>等級意義</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>墓手跨度</td><td>≥ 30m（目測）</td><td>大地主／仕紳級</td></tr>
+          <tr><td>草坡維護</td><td>2022年仍整齊修剪</td><td>後代持續祭掃有財力</td></tr>
+          <tr><td>位於丘陵高地</td><td>制高點私有地</td><td>開墾早期即取得優質地</td></tr>
+          <tr><td>旋繞土丘</td><td>多層天然砂龍</td><td>風水絕佳，極罕見</td></tr>
+          <tr><td>石砌金井</td><td>完整石工</td><td>非一般平民墓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>對比參考：</strong></p>
+    <ul>
+      <li>一般平民墓：約 3–5m 寬</li>
+      <li>普通富農墓：約 8–15m 寬</li>
+      <li><strong>此鄭家大墓：約 30m+ 寬 ← 仕紳地主級</strong></li>
+      <li>頂級官紳墓（石人石馬）：如陳中和墓</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- 歷史推測 -->
+  <section id="history">
+    <h2>🔮 歷史推測：明鄭屯墾後裔</h2>
+
+    <blockquote>
+      <strong>📌 關鍵線索</strong>：Wikipedia 林園區條目記載，明鄭時期跟隨鄭成功遷台的漳州龍溪縣移民姓氏為陳、林、黃、王、廖、韓、蔡、溫、侯共九姓——<strong>鄭不在其中</strong>。但鄭成功部下的「中權鎮」正是在小竹里（今林園）建立「中權莊」屯墾，<strong>中坑門這個地名很可能源自「中權」</strong>。
+    </blockquote>
+
+    <p><strong>推論脈絡：</strong></p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1661年</div>
+        <div class="tl-text">鄭成功部下中權鎮 → 在小竹里（林園）建「中權莊」屯墾</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1683年</div>
+        <div class="tl-text">清朝接收台灣 → 鄭氏王族遷回大陸，普通士兵留台在地化</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">清中期</div>
+        <div class="tl-text">中坑門（中權莊舊地）鄭氏後裔致富，積累地產</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">某年</div>
+        <div class="tl-text">建造此規格宏大的「太師椅」式家族大墓</div>
+      </div>
+    </div>
+
+    <div class="supplement-box">
+      <h4>📌 延伸：中權鎮與林園的關係</h4>
+      <p style="font-size:14px;">鄭成功的軍隊按「五軍都督府」體制編制，「中權鎮」隸屬中軍，負責屯墾南路（今高雄南區）。1661 年入台後，中權鎮士兵在今林園區一帶開墾，建立「中權莊」。清領後，這些屯墾士兵後裔逐漸在地化，其中鄭姓族人可能正是今日中門里鄭家大墓墓主的先祖。</p>
+      <p style="font-size:14px; margin-top:8px;">「中坑門里」舊稱「中坑門」，此地名可能演變自「中權莊」，是台灣地名保留明鄭軍屯記憶的典型案例之一。</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 延伸研究 -->
+  <section id="supplement">
+    <h2>📚 延伸研究與補充</h2>
+
+    <h3>清代台灣的風水葬俗文化</h3>
+    <p>清代台灣漢人移民將閩南、粵東的風水葬俗原封移植，並因台灣多山丘陵的地形，發展出比原鄉更豐富的「龍穴砂水」實踐。高雄平原南緣的鳳山丘陵，自清初即是風水師最重視的尋穴地帶——丘陵提供靠山，前有台灣海峽作朝水，是堪輿理想的「聚氣」地形。</p>
+
+    <h3>鄭氏在台灣清代的社會地位</h3>
+    <p>1683 年清廷接收台灣後，原明鄭軍士的後裔面臨特殊的身份轉換。部分鄭姓家族因早期屯墾取得大量土地，在清代逐漸積累財富，轉型為地方仕紳。台灣南部（今高雄、台南一帶）至今仍有多個以鄭氏為主的聚落，保有清代傳承的宗族結構。</p>
+
+    <h3>台灣現存清代大墓的分布</h3>
+    <div class="supplement-box">
+      <h4>台灣知名清代閩南式仕紳大墓（不完全列舉）</h4>
+      <ul style="font-size:14px;">
+        <li><strong>陳中和墓</strong>（高雄苓雅，1930年）：台灣最著名的閩南式仕紳大墓，石象石獅俱全</li>
+        <li><strong>板橋林家墓園</strong>（新北，清末日治）：林本源家族，台灣北部最具規模</li>
+        <li><strong>南山公墓清代區</strong>（台南）：清代台灣府城的大規模集中墓區，現存多座閩南式大墓</li>
+        <li><strong>此鄭家大墓</strong>（林園）：借天然丘陵地形，砂龍旋繞形制在高雄地區極為罕見</li>
+      </ul>
+    </div>
+
+    <h3>如何參觀（注意事項）</h3>
+    <div class="note-box">
+      ⚠️ 此墓位於私有土地，目前並無開放參觀。建議透過 Google Maps Street View 或空拍資料遠端觀察。若有意前往現場調查，請事先確認土地所有權人的同意，並尊重墓地的祭祀文化。
+      <br><br>
+      鳳鼻頭考古教育館（07-6451327）位於墓地正旁，有開放時段可進入，館方人員可能了解更多在地歷史資料。
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 參考圖片 -->
+  <section id="gallery">
+    <h2>🖼️ 參考圖片佐證</h2>
+
+    <div class="img-block">
+      <div class="img-title">1. 台灣傳統墓葬形制總覽（手繪解說圖）</div>
+      <img src="https://www.biosmonthly.com/storage/upload/ck_images/%E5%A2%B3%E5%A2%93%E7%B8%BD%E8%A6%BD.jpeg"
+           alt="台灣傳統墓葬形制總覽手繪圖"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;padding:40px;text-align:center;color:var(--muted);font-size:14px;">圖片無法載入（外部來源）</div>
+      <div class="img-caption">古建築研究者徐逸鴻手繪，清楚標示各部構件名稱與形制演變<br>來源：BIOS monthly《有墓共睹：5 座台灣特殊墳墓的文史及美學賞析》/ 繪圖：徐逸鴻</div>
+    </div>
+
+    <div class="img-block">
+      <div class="img-title">2. 龜殼墓（墓龜）正面實例——台南南山石碼周公墓</div>
+      <img src="https://www.biosmonthly.com/storage/upload/ck_images/%E7%9F%B3%E7%A2%BC%E5%91%A8%E5%85%AC%E5%A2%93%2001.jpeg"
+           alt="台南南山石碼周公墓"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;padding:40px;text-align:center;color:var(--muted);font-size:14px;">圖片無法載入（外部來源）</div>
+      <div class="img-caption">可清楚看到弧形墓手環抱、前方墓埕的標準閩南式大墓格局<br>來源：BIOS monthly / 攝影：徐逸鴻</div>
+    </div>
+
+    <div class="img-block">
+      <div class="img-title">3. 清代大墓代表——陳中和墓（高雄苓雅，1930年）</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/%E9%AB%98%E9%9B%84%E9%99%B3%E4%B8%AD%E5%92%8C%E5%A2%93.JPG"
+           alt="高雄陳中和墓"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;padding:40px;text-align:center;color:var(--muted);font-size:14px;">圖片無法載入</div>
+      <div class="img-caption">台灣最著名的清代閩南式大墓，由石象、石獅、墓龜、弧形墓手組成。與鄭家大墓同屬仕紳規格，可作為規模對比參考。<br>來源：Wikipedia 陳中和墓 / CC BY-SA 授權</div>
+    </div>
+
+    <div class="img-block">
+      <div class="img-title">4. 閩南龜殼墓實例——泉州靈山伊斯蘭墓</div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Lingshan_Islamic_Cemetery_-_turtle_tomb_-_DSCF8375.JPG"
+           alt="泉州靈山伊斯蘭龜殼墓"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;padding:40px;text-align:center;color:var(--muted);font-size:14px;">圖片無法載入</div>
+      <div class="img-caption">展示龜殼墓（墓龜）的典型剖面形態，福建泉州地區案例，與台灣閩南移民帶來的墓葬形制同源<br>來源：Wikipedia 龜殼墓 / CC BY-SA 授權</div>
+    </div>
+
+    <div class="img-block">
+      <div class="img-title">5. 鄭家大墓實景——Google Street View（2022年5月）</div>
+      <div style="padding:24px 20px;font-size:14px;color:var(--muted);">
+        🔗 可透過以下連結在 Google Maps 瀏覽現場街景：<br>
+        <a href="https://maps.app.goo.gl/Vy6ZgJe42QtrUKXK7" target="_blank" style="color:var(--accent2);">
+          鳳鼻頭考古教育館旁，中門里，座標 22.5124°N 120.3697°E
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 待查資訊 -->
+  <section id="unknown">
+    <h2>❓ 目前未知、待查資訊</h2>
+    <ul>
+      <li>墓主確切名諱（碑文未完整紀錄）</li>
+      <li>建墓確切年代（清代？日治初？）</li>
+      <li>家族世系與歷史貢獻</li>
+      <li>是否有族譜傳世</li>
+    </ul>
+
+    <p style="margin-top:16px;"><strong>建議查詢管道：</strong></p>
+    <ul>
+      <li>鳳鼻頭考古教育館 <a href="tel:076451327" style="color:var(--accent2);">07-6451327</a></li>
+      <li>高雄市立歷史博物館《鳳山縣采訪冊》</li>
+      <li>鄭氏宗親會（高雄市）</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div style="max-width:860px;margin:0 auto;">
+    <div class="sources-title">📎 出處與參考資料</div>
+
+    <div class="source-item">
+      <span class="source-num">[1]</span>
+      <strong>BIOS monthly</strong>《有墓共睹：5 座台灣特殊墳墓的文史及美學賞析》｜徐逸鴻 著作及攝影
+    </div>
+    <div class="source-item">
+      <span class="source-num">[2]</span>
+      <strong>Wikipedia</strong>〈陳中和墓〉圖片 — CC BY-SA 授權
+      <a href="https://zh.wikipedia.org/wiki/%E9%99%B3%E4%B8%AD%E5%92%8C%E5%A2%93" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[3]</span>
+      <strong>Wikipedia</strong>〈龜殼墓〉圖片（泉州靈山）— CC BY-SA 授權
+      <a href="https://zh.wikipedia.org/wiki/%E9%BE%9C%E6%AE%BC%E5%A2%93" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[4]</span>
+      <strong>OpenStreetMap</strong> Way #224096020 — 鄭家大墓地理資料
+      <a href="https://www.openstreetmap.org/way/224096020" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[5]</span>
+      <strong>Wikipedia</strong>〈林園區〉— 明鄭時期移民姓氏記載、中權莊屯墾歷史
+      <a href="https://zh.wikipedia.org/wiki/%E6%9E%97%E5%9C%92%E5%8D%80" target="_blank">查看來源</a>
+    </div>
+    <div class="source-item">
+      <span class="source-num">[6]</span>
+      <strong>文化部文化資產局</strong>〈鳳鼻頭（中坑門）遺址〉— 國定考古遺址基本資料
+    </div>
+    <div class="source-item">
+      <span class="source-num">[7]</span>
+      <strong>Google Maps Street View</strong> — 2022年5月現場街景影像記錄
+      <a href="https://maps.app.goo.gl/Vy6ZgJe42QtrUKXK7" target="_blank">查看街景</a>
+    </div>
+
+    <p style="margin-top:28px;font-size:12px;color:var(--muted);text-align:center;">
+      資料整理：2026-06-12 ｜ Claude Code 輔助田野調查<br>
+      本頁資料為初步研究整理，部分內容為合理推論，尚待史料驗證。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
